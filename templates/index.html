@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <title>Products</title>
+</head>
+<body>
+
+<h1>Products</h1>
+
+
+<form method="POST">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="text" name="price" placeholder="Price" required>
+    <input type="text" name="category" placeholder="Category" required>
+    <button type="submit">Add</button>
+</form>
+
+<br>
+
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color: green;">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+<table border="1">
+<tr>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Category</th>
+    <th>Action</th>
+</tr>
+
+{% for product in products %}
+<tr>
+    <td>{{ product.name }}</td>
+    <td>{{ product.price }}</td>
+    <td>{{ product.category }}</td>
+    <td>
+        <a href="{{ url_for('delete', index=loop.index0) }}">
+            <button>Delete</button>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
+              <!-- loop.index - повертає порядковий номер ітерації (повторення) -->
